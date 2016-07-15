@@ -11,20 +11,20 @@ then
   echo -n "Warning: This script is only tested against Ubuntu 14.04. Press <enter> to continue at your own risk... "
   read
 fi
-if [ `whoami` != "root" -o -n "$SUDO_COMMAND" ]
+if [ `whoami` != "root" ]
 then
-  echo "This script must be run as root, and not using 'sudo'!"
+  echo "This script must be run as root!"
   exit 1
 fi
 
 # Set up the packages we need
 apt-get update
-apt-get install git vim -y
+apt-get install git vim wget -y
 
 # Clone the devstack repo
 git clone https://github.com/openstack-dev/devstack.git /tmp/devstack
 
-wget -O - https://raw.githubusercontent.com/rm-you/devstack_deploy/master/localrc > /tmp/devstack/localrc
+wget -O - https://raw.githubusercontent.com/diltram/devstack_deploy/master/localrc > /tmp/devstack/localrc
 
 # Create the stack user
 /tmp/devstack/tools/create-stack-user.sh
@@ -75,10 +75,10 @@ fi
 pip install tox
 
 # Grab utility scripts from github and add them to stack's .profile
-wget -O - https://raw.githubusercontent.com/rm-you/devstack_deploy/master/profile >> /opt/stack/.profile
+wget -O - https://raw.githubusercontent.com/diltram/devstack_deploy/master/profile >> /opt/stack/.profile
 
 # Set up barbican container
-bash <(curl -sL https://raw.githubusercontent.com/rm-you/devstack_deploy/master/make_container.sh)
+bash <(curl -sL https://raw.githubusercontent.com/diltram/devstack_deploy/master/make_container.sh)
 
 # Drop into a shell
 su - stack

@@ -18,4 +18,3 @@ profile
 make_container.sh
 -----------------
 * Script to create secrets and containers in barbican (dummy snakeoil cert)
-
