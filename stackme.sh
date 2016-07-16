@@ -80,5 +80,4 @@ wget -O - https://raw.githubusercontent.com/diltram/devstack_deploy/master/profi
 # Set up barbican container
 bash <(curl -sL https://raw.githubusercontent.com/diltram/devstack_deploy/master/make_container.sh)
 
-# Drop into a shell
-su - stack
+echo "Done"
